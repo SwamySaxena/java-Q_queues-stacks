@@ -9,23 +9,30 @@ class QueueWithStack <V> {
         stack2 = new Stack<>(maxSize);
     }
     public boolean isEmpty(){
-      return stack1.isEmpty();
+      return (stack1.isEmpty() && stack2.isEmpty());
     }
     public void enqueue(V value){
         stack1.push(value);
     }
     public V dequeue(){
-        //Traverse stack1 and pop all elements in stack2
-        while (!stack1.isEmpty()){
+        //return null if both the stacks are empty 
+        if (isEmpty()){
+          return null;
+        }
+        else if (stack2.isEmpty()){ 
+          //if stack2 is empty, we pop all the elements
+			    //from stack1 and push them to the stack2
+          while(!stack1.isEmpty()){
             stack2.push(stack1.pop());
+          }
+          //finally, we return the top of stack2
+          return stack2.pop();
         }
-        //pop from stack2 (which was at the end of stack1)
-        V result = stack2.pop();
-        //put all elements back in stack1
-        while (!stack2.isEmpty()){
-            stack1.push(stack2.pop());
+        else{ 
+          //if none of the above conditions are true
+          //we will simply return the top of stack2
+          return stack2.pop();
         }
-        return result;
     }
 
 }
