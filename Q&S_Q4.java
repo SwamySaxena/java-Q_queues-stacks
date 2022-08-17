@@ -1,4 +1,4 @@
-class QueueWithStack <V> {
+class QueueWithStack <V>{
 	//We can use 2 stacks for this purpose, stack1 to store original values
 	//and stack2 which will help in dequeue operation.
     Stack<V> stack1;
